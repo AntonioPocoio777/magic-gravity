@@ -1,0 +1,566 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rocha Chueiri — Escola dos Cavaleiros</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=MedievalSharp&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cinzel', serif;
+            color: #f5e6c8;
+            background:
+                linear-gradient(rgba(20, 14, 9, .82), rgba(20, 14, 9, .92)),
+                radial-gradient(circle at top, #704d27, #17110c 70%);
+            background-attachment: fixed;
+        }
+
+        /* CABEÇALHO */
+        header {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            border-bottom: 8px solid #b68a3c;
+            background:
+                linear-gradient(rgba(15, 12, 8, .35), rgba(15, 12, 8, .88)),
+                linear-gradient(135deg, #3d3023, #15110d);
+        }
+
+        .castle {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 45%;
+            opacity: .45;
+            background:
+                linear-gradient(to top, #0b0907 0 70%, transparent 70%),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent 0 70px,
+                    #0b0907 70px 100px,
+                    transparent 100px 140px
+                );
+            clip-path: polygon(
+                0 45%, 8% 45%, 8% 20%, 14% 20%, 14% 38%,
+                25% 38%, 25% 10%, 32% 10%, 32% 38%,
+                42% 38%, 42% 20%, 49% 20%, 49% 40%,
+                61% 40%, 61% 5%, 69% 5%, 69% 40%,
+                80% 40%, 80% 18%, 87% 18%, 87% 40%,
+                100% 40%, 100% 100%, 0 100%
+            );
+        }
+
+        .hero {
+            position: relative;
+            z-index: 2;
+            padding: 30px;
+        }
+
+        .shield {
+            width: 130px;
+            height: 150px;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 65px;
+            background: linear-gradient(145deg, #9b2226, #450d10);
+            border: 7px solid #d4af55;
+            border-radius: 15px 15px 55px 55px;
+            box-shadow:
+                0 0 0 5px #3b2a17,
+                0 15px 40px #000;
+            transform: rotate(0deg);
+        }
+
+        h1 {
+            font-family: 'MedievalSharp', cursive;
+            font-size: clamp(3rem, 8vw, 7rem);
+            color: #d8b35a;
+            text-shadow: 4px 4px 0 #291b0e, 0 0 25px #d18b28;
+            letter-spacing: 5px;
+        }
+
+        .subtitle {
+            margin: 20px auto 35px;
+            max-width: 800px;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #e8d5ad;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 16px 35px;
+            margin: 8px;
+            color: #26170b;
+            background: linear-gradient(#e6c875, #9b7027);
+            border: 3px solid #f1dc91;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 900;
+            transition: .3s;
+            box-shadow: 0 6px 0 #4c3214;
+        }
+
+        .button:hover {
+            transform: translateY(-5px);
+            filter: brightness(1.2);
+            box-shadow: 0 11px 0 #4c3214;
+        }
+
+        /* NAVEGAÇÃO */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(20, 13, 8, .96);
+            border-bottom: 2px solid #9f762d;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #e4c46e;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: .2s;
+        }
+
+        nav a:hover {
+            color: white;
+            text-shadow: 0 0 10px #d7a83e;
+        }
+
+        /* SEÇÕES */
+        section {
+            padding: 90px 8%;
+            max-width: 1300px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-family: 'MedievalSharp', cursive;
+            font-size: 3rem;
+            color: #d8b35a;
+            text-shadow: 3px 3px #24160b;
+        }
+
+        .section-title p {
+            margin-top: 10px;
+            color: #bda980;
+        }
+
+        .parchment {
+            color: #352313;
+            background:
+                linear-gradient(90deg, #d2b77a, #f0dca9, #c7aa6c);
+            padding: 45px;
+            border: 8px solid #67441e;
+            border-radius: 4px;
+            box-shadow: 0 15px 35px #000;
+            line-height: 1.9;
+            font-family: Georgia, serif;
+            font-size: 1.1rem;
+        }
+
+        /* CARDS */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #332319, #17100b);
+            border: 2px solid #87652e;
+            padding: 30px;
+            text-align: center;
+            border-radius: 8px;
+            transition: .3s;
+            box-shadow: 0 10px 25px #0008;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: #d8b35a;
+        }
+
+        .card .icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: #dfbd68;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #cbb996;
+            line-height: 1.7;
+        }
+
+        /* CASAS */
+        .houses {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .house {
+            padding: 30px;
+            text-align: center;
+            border: 3px solid;
+            background: #1b130e;
+            box-shadow: inset 0 0 30px #000;
+        }
+
+        .house h3 {
+            font-family: 'MedievalSharp', cursive;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .red { border-color: #9b2226; }
+        .red h3 { color: #e44a50; }
+
+        .blue { border-color: #315b85; }
+        .blue h3 { color: #6ea6d9; }
+
+        .green { border-color: #426b38; }
+        .green h3 { color: #80b66e; }
+
+        .gold { border-color: #b68a3c; }
+        .gold h3 { color: #e1bd5b; }
+
+        /* CALENDÁRIO */
+        .events {
+            border-left: 4px solid #b68a3c;
+            padding-left: 25px;
+        }
+
+        .event {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #251911;
+            border: 1px solid #674a26;
+        }
+
+        .event strong {
+            color: #e0bd64;
+        }
+
+        /* RODAPÉ */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            background: #0c0906;
+            border-top: 5px solid #876329;
+        }
+
+        footer .crest {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        footer p {
+            color: #9e8a6b;
+            margin: 8px;
+        }
+
+        /* ANIMAÇÃO */
+        .torch {
+            position: fixed;
+            top: 20%;
+            left: 20px;
+            font-size: 35px;
+            animation: fire .7s infinite alternate;
+            z-index: 5;
+        }
+
+        .torch.right {
+            left: auto;
+            right: 20px;
+        }
+
+        @keyframes fire {
+            from {
+                transform: scale(1) rotate(-4deg);
+                filter: brightness(1);
+            }
+            to {
+                transform: scale(1.15) rotate(5deg);
+                filter: brightness(1.5);
+            }
+        }
+
+        @media (max-width: 650px) {
+            nav a {
+                display: inline-block;
+                margin: 5px;
+                font-size: .8rem;
+            }
+
+            section {
+                padding: 60px 5%;
+            }
+
+            .parchment {
+                padding: 25px;
+            }
+
+            .torch {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="torch">🔥</div>
+    <div class="torch right">🔥</div>
+
+    <!-- CAPA -->
+    <header id="inicio">
+        <div class="castle"></div>
+
+        <div class="hero">
+            <div class="shield">⚔️</div>
+
+            <h1>ROCHA CHUEIRI</h1>
+
+            <p class="subtitle">
+                Escola de Honra, Sabedoria e Coragem<br>
+                <strong>Onde cada estudante forja o seu próprio legado.</strong>
+            </p>
+
+            <a class="button" href="#escola">Conheça a Escola</a>
+            <a class="button" href="#casas">As Casas</a>
+        </div>
+    </header>
+
+    <!-- MENU -->
+    <nav>
+        <a href="#inicio">🏰 Início</a>
+        <a href="#escola">📜 A Escola</a>
+        <a href="#casas">🛡️ Casas</a>
+        <a href="#valores">⚔️ Valores</a>
+        <a href="#eventos">📅 Eventos</a>
+    </nav>
+
+    <!-- SOBRE -->
+    <section id="escola">
+        <div class="section-title">
+            <h2>📜 A Escola Rocha Chueiri</h2>
+            <p>Um lugar onde o conhecimento é nossa maior espada.</p>
+        </div>
+
+        <div class="parchment">
+            <p>
+                <strong>Bem-vindo à Rocha Chueiri!</strong>
+            </p>
+
+            <br>
+
+            <p>
+                Erguida sobre os pilares da sabedoria, da amizade e da coragem,
+                nossa escola é um verdadeiro reino do conhecimento.
+            </p>
+
+            <p>
+                Aqui, cada aluno é convidado a descobrir seus talentos,
+                enfrentar desafios e construir sua própria história.
+            </p>
+
+            <br>
+
+            <p>
+                <strong>Nosso lema:</strong>
+                "Conhecimento é a espada. Coragem é o escudo. O futuro é o nosso reino."
+            </p>
+        </div>
+    </section>
+
+    <!-- CASAS -->
+    <section id="casas">
+        <div class="section-title">
+            <h2>🛡️ As Casas do Reino</h2>
+            <p>Escolha seu brasão e descubra seu caminho.</p>
+        </div>
+
+        <div class="houses">
+
+            <div class="house red">
+                <div class="icon">🦁</div>
+                <h3>Casa da Coragem</h3>
+                <p>Representa bravura, liderança e determinação.</p>
+            </div>
+
+            <div class="house blue">
+                <div class="icon">🦅</div>
+                <h3>Casa da Sabedoria</h3>
+                <p>Representa inteligência, criatividade e conhecimento.</p>
+            </div>
+
+            <div class="house green">
+                <div class="icon">🐉</div>
+                <h3>Casa da Lealdade</h3>
+                <p>Representa amizade, união e companheirismo.</p>
+            </div>
+
+            <div class="house gold">
+                <div class="icon">🐺</div>
+                <h3>Casa da Honra</h3>
+                <p>Representa respeito, justiça e responsabilidade.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- VALORES -->
+    <section id="valores">
+        <div class="section-title">
+            <h2>⚔️ Os Valores dos Cavaleiros</h2>
+            <p>Princípios que guiam nossa comunidade.</p>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="icon">📚</div>
+                <h3>Sabedoria</h3>
+                <p>
+                    Buscamos conhecimento e incentivamos a curiosidade
+                    para compreender o mundo.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🛡️</div>
+                <h3>Respeito</h3>
+                <p>
+                    Todos fazem parte do mesmo reino e merecem respeito,
+                    dignidade e consideração.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">⚔️</div>
+                <h3>Coragem</h3>
+                <p>
+                    Enfrentamos desafios com determinação e nunca
+                    desistimos diante das dificuldades.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🤝</div>
+                <h3>União</h3>
+                <p>
+                    Juntos somos mais fortes. A amizade e a cooperação
+                    tornam nosso reino melhor.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- EVENTOS -->
+    <section id="eventos">
+        <div class="section-title">
+            <h2>📅 Crônicas do Reino</h2>
+            <p>Confira as aventuras que aguardam nossos estudantes.</p>
+        </div>
+
+        <div class="events">
+
+            <div class="event">
+                <strong>🏰 FESTIVAL DO CASTELO</strong>
+                <p>
+                    Um grande dia de jogos, apresentações e atividades
+                    para toda a comunidade escolar.
+                </p>
+            </div>
+
+            <div class="event">
+                <strong>⚔️ TORNEIO DOS CAVALEIROS</strong>
+                <p>
+                    Competição entre as casas com desafios de conhecimento,
+                    criatividade e trabalho em equipe.
+                </p>
+            </div>
+
+            <div class="event">
+                <strong>📜 FEIRA DO CONHECIMENTO</strong>
+                <p>
+                    Nossos jovens mestres apresentam seus projetos,
+                    invenções e descobertas.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- RODAPÉ -->
+    <footer>
+        <div class="crest">🏰 ⚔️ 🛡️</div>
+
+        <h2>ROCHA CHUEIRI</h2>
+
+        <p>
+            "Forjando o futuro, um cavaleiro de cada vez."
+        </p>
+
+        <p>
+            © 2026 Escola Rocha Chueiri — Todos os direitos reservados.
+        </p>
+    </footer>
+
+    <script>
+        // Pequena saudação medieval ao entrar no site
+        console.log(
+            "🏰 Bem-vindo ao Reino Rocha Chueiri! ⚔️"
+        );
+
+        // Efeito suave nos cards
+        const cards = document.querySelectorAll(".card");
+
+        cards.forEach(card => {
+            card.addEventListener("mouseenter", () => {
+                card.style.transform = "translateY(-10px) scale(1.02)";
+            });
+
+            card.addEventListener("mouseleave", () => {
+                card.style.transform = "";
+            });
+        });
+    </script>
+
+</body>
+</html>
